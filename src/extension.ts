@@ -1,11 +1,13 @@
 import * as vscode from 'vscode';
 import axios from 'axios';
+import * as path from 'path';
 import PackageInfo from './package-info';
 
 export function activate(context: vscode.ExtensionContext) {
 	console.log('activated!');
-	context.subscriptions.push(vscode.languages.registerCompletionItemProvider({ language: 'yaml', scheme: 'file' }, {
+	context.subscriptions.push(vscode.languages.registerCompletionItemProvider({ language: 'yaml', scheme: 'file', }, {
 		provideCompletionItems(document: vscode.TextDocument, position: vscode.Position) {						
+			if(path.basename(document.fileName) !== 'pubspec.yml' && path.basename(document.fileName) !== 'pubspec.yaml') return;
 			let items: vscode.CompletionItem[] = [];
 			let line = document.lineAt(position.line);
 			let dependencyName = line.text.split(':')[0].trim();
