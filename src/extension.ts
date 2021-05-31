@@ -1,12 +1,11 @@
 import * as vscode from 'vscode';
-import * as path from 'path';
 import axios from 'axios';
 import PackageInfo from './package-info';
 
 export function activate(context: vscode.ExtensionContext) {
 	console.log('activated!');
 	context.subscriptions.push(vscode.languages.registerCompletionItemProvider({ language: 'yaml', scheme: 'file' }, {
-		provideCompletionItems(document: vscode.TextDocument, position: vscode.Position) {
+		provideCompletionItems(document: vscode.TextDocument, position: vscode.Position) {						
 			let items: vscode.CompletionItem[] = [];
 			let line = document.lineAt(position.line);
 			let dependencyName = line.text.split(':')[0].trim();
@@ -14,24 +13,26 @@ export function activate(context: vscode.ExtensionContext) {
 			return new Promise(async (resolve, reject) => {
 				let res = await axios.get(`${pubServer}/api/packages/${dependencyName}`);
 				const packageInfo = new PackageInfo(res.data);
+				let i = 0;
 				for (let version of packageInfo.versions) {
-					if (version === packageInfo.latest) {
-						let item = new vscode.CompletionItem(`${version} (latest)`, vscode.CompletionItemKind.Constant);
-						item.insertText = new vscode.SnippetString(version);
+					if (version.version === packageInfo.latest) {
+						let item = new vscode.CompletionItem(`${version.version} (latest)`, vscode.CompletionItemKind.Constant);
+						item.insertText = new vscode.SnippetString(version.version);
+						item.sortText = i.toString();
 						items.push(item);
 					}
 					else {
-						let item = new vscode.CompletionItem(`${version}`, vscode.CompletionItemKind.Constant);
-						item.insertText = new vscode.SnippetString(version);
+						let item = new vscode.CompletionItem(`${version.version}`, vscode.CompletionItemKind.Constant);
+						item.insertText = new vscode.SnippetString(version.version);
+						item.sortText = i.toString();
 						items.push(item);
 					}
+					i++;
 				}
 				resolve(items);
 			});
 		}
 	}, ''));
 }
-
-
 
 export function deactivate() { }
