@@ -1,10 +1,10 @@
 {
-	"name": "pub-dependencies",
-	"displayName": "pub-dependencies",
-	"description": "",
+	"name": "pub-dependencies-version",
+	"displayName": "pub-dependencies-version",
+	"description": "This extension provides auto completion for dependencies version in pubspec.yml file.",
 	"version": "0.0.1",
 	"engines": {
-		"vscode": "^1.56.0"
+		"vscode": "^1.44.0"
 	},
 	"categories": [
 		"Other"
