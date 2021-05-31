@@ -1,6 +1,8 @@
 {
 	"name": "pub-dependencies-version",
 	"displayName": "pub-dependencies-version",
+	"publisher": "fred16157",
+	"repository": "https://github.com/fred16157/pub-dependencies",
 	"description": "This extension provides auto completion for dependencies version in pubspec.yml file.",
 	"version": "0.0.1",
 	"engines": {
@@ -33,7 +35,7 @@
 		"@types/glob": "^7.1.3",
 		"@types/mocha": "^8.0.4",
 		"@types/node": "^12.11.7",
-		"@types/vscode": "^1.56.0",
+		"@types/vscode": "^1.44.0",
 		"@typescript-eslint/eslint-plugin": "^4.14.1",
 		"@typescript-eslint/parser": "^4.14.1",
 		"eslint": "^7.19.0",
