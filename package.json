@@ -4,7 +4,7 @@
 	"publisher": "fred16157",
 	"repository": "https://github.com/fred16157/pub-dependencies",
 	"description": "This extension provides auto completion for dependencies version in pubspec.yml file.",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"engines": {
 		"vscode": "^1.44.0"
 	},
